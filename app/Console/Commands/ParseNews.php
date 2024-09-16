@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\News;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -75,6 +76,12 @@ class ParseNews extends Command
                     'link' => $link,
                     'source' => $url, // Исходный адрес сайта
                 ];
+
+                News::create([
+                    'title' => $title,
+                    'link' => $link,
+                    'source' => $url,
+                ]);
 
                 // Выводим ссылку в консоль
                 $this->info("Заголовок: $title");
